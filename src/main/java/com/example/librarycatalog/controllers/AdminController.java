@@ -32,4 +32,18 @@ public class AdminController {
         book.setAuthor(author);
         return "redirect:/";
     }
+
+    @GetMapping("/{bookId}/edit")
+    public String editBookInfo(@PathVariable("bookId") Long bookId, Model model){
+        Book book = bookService.getById(bookId);
+        model.addAttribute("book", book);
+        return "book-edit";
+    }
+
+    @PostMapping("/{bookId}/edit")
+    public String saveUpdatedBook(@PathVariable("bookId") Long bookId, @ModelAttribute("book") Book book, Model model){
+        book.setId(bookId);
+        bookService.editBook(book);
+        return "redirect:/";
+    }
 }

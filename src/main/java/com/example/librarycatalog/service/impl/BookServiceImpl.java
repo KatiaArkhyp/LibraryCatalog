@@ -57,4 +57,18 @@ public class BookServiceImpl implements BookService {
     public long getBookCount() {
         return bookRepository.count();
     }
+
+    @Override
+    public void editBook(Book book) {
+        Book existingBook = bookRepository.findById(book.getId())
+                .orElseThrow(() -> new RuntimeException("Book not found with ID: " + book.getId()));
+
+        existingBook.setTitle(book.getTitle());
+        existingBook.setAuthor(book.getAuthor());
+        existingBook.setBookSummary(book.getBookSummary());
+        existingBook.setCoverUrlBook(book.getCoverUrlBook());
+        existingBook.setKeywords(book.getKeywords());
+
+        bookRepository.save(existingBook);
+    }
 }
