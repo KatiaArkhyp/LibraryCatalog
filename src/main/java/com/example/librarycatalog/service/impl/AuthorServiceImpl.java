@@ -4,10 +4,12 @@ import com.example.librarycatalog.models.Author;
 import com.example.librarycatalog.repository.AuthorRepository;
 import com.example.librarycatalog.service.AuthorService;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
 
+@Service
 @AllArgsConstructor
 public class AuthorServiceImpl implements AuthorService {
 

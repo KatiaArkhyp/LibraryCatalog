@@ -3,9 +3,11 @@ package com.example.librarycatalog.service.impl;
 import com.example.librarycatalog.models.Keyword;
 import com.example.librarycatalog.repository.KeywordRepository;
 import com.example.librarycatalog.service.KeywordService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class KeywordServiceImpl implements KeywordService {
 
     private KeywordRepository keywordRepository;

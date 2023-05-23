@@ -4,10 +4,12 @@ import com.example.librarycatalog.models.Book;
 import com.example.librarycatalog.repository.BookRepository;
 import com.example.librarycatalog.service.BookService;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
 
+@Service
 @AllArgsConstructor
 public class BookServiceImpl implements BookService {
 
