@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Create</title>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+  <section layout:fragment="body" class="py-5">
+    <div class="container">
+    <form role="form" method="post" th:action="@{/create}" th:object="${book}">
+      <div class="form-row">
+        <!-- title -->
+        <div class="form-group col-md-7 mb-2">
+          <label for="inputTitle">Title</label>
+          <input type="text"
+                 class="form-control"
+                 id="inputTitle"
+                 name="title"
+                 th:field="*{title}"
+                 placeholder="Harry Potter and the Philosopher's Stone"
+                 required>
+        </div>
+        <!-- author -->
+        <div class="form-group col-md-7 mb-2">
+          <label for="inputAuthor">Author</label>
+          <input type="text"
+                 class="form-control"
+                 id="inputAuthor"
+                 name="author.name"
+                 th:field="*{author.name}"
+                 placeholder="Joanne Rowling"
+                 required>
+        </div>
+      </div>
+      <!-- cover -->
+      <div class="form-group mb-2">
+        <label for="inputURL">Cover (URL)</label>
+        <input type="text"
+               class="form-control"
+               id="inputURL" name="coverUrlBook"
+               th:field="*{coverUrlBook}"
+               placeholder="https://cover-book.com/images/harry-potter.jpg">
+      </div>
+      <!-- summary -->
+      <div class="form-group mb-2">
+        <label for="inputSummary">Summary</label>
+        <textarea class="form-control"
+                  id="inputSummary"
+                  name="bookSummary"
+                  th:field="*{bookSummary}"
+                  placeholder="The novels follow Harry Potter, an 11-year-old boy who discovers he is the son of famous wizards and will attend Hogwarts School of Witchcraft and Wizardry." rows="5">
+        </textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Add new book</button>
+    </form>
+    </div>
+  </section>
+</main>
+</body>
+</html>

@@ -5,29 +5,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Library</title>
-    <style>
-        .img-fluid {
-            width: 70%;
-        }
-        .h3 {
-            margin-top: 3px;
-            margin-bottom: 0;
-        }
-    </style>
 </head>
 <body class="d-flex flex-column h-100">
 <main class="flex-shrink-0">
     <section layout:fragment="body" class="py-5">
         <div class="container px-5 my-5">
-            <div class="text-center mb-5">
+            <div class="text-left mb-5">
                 <h1 class="fw-bolder">Catalog of available books</h1>
+                <p>A home for <span th:text="${bookCount}"></span> books.</p>
             </div>
             <div class="row gx-5">
-                <div th:each="book : ${books}" class="col-lg-4">
+                <div th:each="book : ${books}" class="col-lg-4 mb-5">
                     <div class="position-relative mb-5">
-                        <img th:src="${book.coverUrlBook}" class="img-fluid rounded-3 mb-3" alt="Cover Image"/>
-                        <p class="h3 fw-bolder" th:text="${book.title}"></p>
+                        <img th:src="${book.coverUrlBook}" class="img-fluid rounded-3 mb-3 w-75" alt="Cover Image"/>
+                        <p class="h3 fw-bolder mb-0" th:text="${book.title}"></p>
                         <p th:text="${book.author.name}" class="fw-bolder text-muted"></p>
+                        <p th:text="${book.bookSummary}" class="text-muted"></p>
                     </div>
                 </div>
             </div>

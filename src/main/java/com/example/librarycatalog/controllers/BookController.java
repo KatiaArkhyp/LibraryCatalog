@@ -21,6 +21,9 @@ public class BookController {
     public String showAllBooks(Model model){
         List<Book> books = bookService.getAllBooks();
         model.addAttribute("books", books);
+
+        long bookCount = bookService.getBookCount();
+        model.addAttribute("bookCount", bookCount);
         return "index";
     }
 

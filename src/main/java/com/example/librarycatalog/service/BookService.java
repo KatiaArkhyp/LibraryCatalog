@@ -14,4 +14,5 @@ public interface BookService {
     Book getById(Long id);
     Book saveBook(Book book);
     void deleteBook(Long id);
+    long getBookCount();
 }
