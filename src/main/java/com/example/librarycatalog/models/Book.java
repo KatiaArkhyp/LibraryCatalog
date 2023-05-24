@@ -1,6 +1,8 @@
 package com.example.librarycatalog.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,8 +26,10 @@ public class Book {
     @ManyToOne(cascade = CascadeType.ALL)
     private Author author;
 
+    @NotEmpty(message = "Enter the title of the book")
     private String title;
 
+    @NotEmpty(message = "Upload the book cover")
     @Column(name = "cover_book")
     private String coverUrlBook;
 

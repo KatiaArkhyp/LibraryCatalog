@@ -2,6 +2,7 @@ package com.example.librarycatalog.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
@@ -19,8 +20,6 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Enter the name of the author")
-    @Length(max = 50, message = "The author's name is too long")
     private String name;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)

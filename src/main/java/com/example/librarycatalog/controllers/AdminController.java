@@ -7,9 +7,11 @@ import com.example.librarycatalog.service.AuthorService;
 import com.example.librarycatalog.service.BookService;
 import com.example.librarycatalog.service.KeywordService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -35,7 +37,13 @@ public class AdminController {
     }
 
     @PostMapping("/create")
-    public String saveBook(@ModelAttribute("book") Book book, @ModelAttribute("author") Author author, HttpServletRequest request){
+    public String saveBook(@Valid @ModelAttribute("book") Book book,
+                           BindingResult result,
+                           @ModelAttribute("author") Author author,
+                           HttpServletRequest request){
+        if(result.hasErrors()){
+            return "books-create";
+        }
         List<Keyword> selectedKeywords = getSelectedKeywords(request);
         book.setKeywords(selectedKeywords);
 
@@ -55,7 +63,13 @@ public class AdminController {
     }
 
     @PostMapping("/{bookId}/edit")
-    public String saveUpdatedBook(@PathVariable("bookId") Long bookId, @ModelAttribute("book") Book book, Model model, HttpServletRequest request){
+    public String saveUpdatedBook(@PathVariable("bookId") Long bookId,
+                                  @Valid @ModelAttribute("book") Book book,
+                                  BindingResult result,
+                                  HttpServletRequest request){
+        if(result.hasErrors()){
+            return "book-edit";
+        }
         List<Keyword> selectedKeywords = getSelectedKeywords(request);
         book.setKeywords(selectedKeywords);
 
@@ -63,5 +77,23 @@ public class AdminController {
         bookService.editBook(book);
 
         return "redirect:/";
+    }
+
+    @GetMapping("/{bookId}/delete")
+    public String deleteBook(@PathVariable("bookId") Long bookId){
+        bookService.deleteBook(bookId);
+        return "redirect:/";
+    }
+
+    private List<Keyword> getSelectedKeywords(HttpServletRequest request) {
+        List<Keyword> selectedKeywords = new ArrayList<>();
+        String[] keywordIds = request.getParameterValues("keywords");
+        if (keywordIds != null) {
+            for (String keywordId : keywordIds) {
+                Keyword keyword = keywordService.getKeywordById(Long.parseLong(keywordId));
+                selectedKeywords.add(keyword);
+            }
+        }
+        return selectedKeywords;
     }
 }

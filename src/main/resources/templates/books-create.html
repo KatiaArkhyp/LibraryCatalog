@@ -20,8 +20,8 @@
                  id="inputTitle"
                  name="title"
                  th:field="*{title}"
-                 placeholder="Harry Potter and the Philosopher's Stone"
-                 required>
+                 placeholder="Harry Potter and the Philosopher's Stone">
+          <p th:if="${#fields.hasErrors('title')}" class="text-danger" th:errors="*{title}"></p>
         </div>
         <!-- author -->
         <div class="form-group col-md-7 mb-2">
@@ -31,8 +31,7 @@
                  id="inputAuthor"
                  name="author.name"
                  th:field="*{author.name}"
-                 placeholder="Joanne Rowling"
-                 required>
+                 placeholder="Joanne Rowling">
         </div>
       </div>
       <!-- cover -->
@@ -43,6 +42,7 @@
                id="inputURL" name="coverUrlBook"
                th:field="*{coverUrlBook}"
                placeholder="https://cover-book.com/images/harry-potter.jpg">
+        <p th:if="${#fields.hasErrors('coverUrlBook')}" class="text-danger" th:errors="*{coverUrlBook}"></p>
       </div>
       <!-- summary -->
       <div class="form-group mb-2">
