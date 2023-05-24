@@ -54,6 +54,19 @@
                   placeholder="The novels follow Harry Potter, an 11-year-old boy who discovers he is the son of famous wizards and will attend Hogwarts School of Witchcraft and Wizardry." rows="5">
         </textarea>
       </div>
+      <!-- keywords -->
+      <div class="form-group mb-2">
+        <label for="inputKeywords">Keywords</label>
+        <div class="form-check" th:each="keyword : ${keywords}">
+          <input type="checkbox"
+                 class="form-check-input"
+                 id="inputKeywords"
+                 th:id="${'keyword-' + keyword.id}"
+                 th:name="'keywords'"
+                 th:value="${keyword.id}">
+          <label class="form-check-label" th:for="${'keyword-' + keyword.id}" th:text="${keyword.keyword}"></label>
+        </div>
+      </div>
       <button type="submit" class="btn btn-primary">Add new book</button>
     </form>
     </div>
