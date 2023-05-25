@@ -23,11 +23,6 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> findByAuthor(String authorName) {
-        return bookRepository.findByAuthorNameContainingIgnoreCase(authorName);
-    }
-
-    @Override
     public List<Book> findByTitle(String title) {
         return bookRepository.findByTitleContainingIgnoreCase(title);
     }
@@ -35,6 +30,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> findByKeyword(String keyword) {
         return bookRepository.findByKeywordsKeywordLikeIgnoreCase(keyword);
+    }
+
+    @Override
+    public List<Book> findByAuthor(String author) {
+        return bookRepository.findByAuthorNameContainingIgnoreCase(author);
     }
 
     @Override

@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
     <title>Library</title>
@@ -11,21 +9,29 @@
     <section layout:fragment="body" class="py-5">
         <div class="container px-5 my-5">
             <div class="text-left mb-5">
-                <h1 class="fw-bolder">Catalog of available books</h1>
+                <div class="d-flex align-items-center justify-content-between">
+                    <h1 class="fw-bolder">Catalog of available books</h1>
+                    <form th:action="@{/search}" class="form-inline my-2 my-lg-0 col-lg-6">
+                        <div class="input-group">
+                            <input type="search" class="form-control" name="query" placeholder="Search by title/author/keyword" aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <p>A home for <span th:text="${bookCount}"></span> books.</p>
             </div>
             <div class="row gx-5">
                 <div th:each="book : ${books}" class="col-lg-4 mb-5">
                     <a class="btn btn-primary mb-1" th:href="@{/{bookId}/edit(bookId=${book.id})}">Edit the book</a>
-                    <a class="btn btn-danger mb-1" th:href="@{/{bookId}/delete(bookId=${book.id})}"
-                       onclick="return confirm('Are you sure you want to delete the book?')">Delete</a>
+                    <a class="btn btn-danger mb-1" th:href="@{/{bookId}/delete(bookId=${book.id})}" onclick="return confirm('Are you sure you want to delete the book?')">Delete</a>
                     <div class="position-relative mb-3">
                         <img th:src="${book.coverUrlBook}" class="img-fluid rounded-3 mb-3 w-75" alt="Cover Image"/>
                         <p class="h3 fw-bolder mb-0" th:text="${book.title}"></p>
                         <p th:text="${book.author.name}" class="fw-bolder text-muted"></p>
                         <p th:text="${book.bookSummary}" class="text-muted"></p>
                     </div>
-
                 </div>
             </div>
         </div>

@@ -8,8 +8,8 @@ import java.util.List;
 @Service
 public interface BookService {
     List<Book> getAllBooks();
-    List<Book> findByAuthor(String authorName);
     List<Book> findByTitle(String title);
+    List<Book> findByAuthor(String author);
     List<Book> findByKeyword(String keyword);
     Book getById(Long id);
     Book saveBook(Book book);
