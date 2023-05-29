@@ -1,9 +1,14 @@
 package com.example.librarycatalog.security;
 
+import com.example.librarycatalog.models.Role;
+import com.example.librarycatalog.repository.RoleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
@@ -19,13 +24,14 @@ public class SecurityConfig{
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(10);
     }
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/login", "/registration", "/", "/registration/**", "/css/**", "/js/**")
+                .requestMatchers("/{bookId}/delete","/{bookId}/edit", "/create").hasAuthority("ADMIN")
+                .requestMatchers("/login", "/registration", "/", "/search", "/registration/**", "/css/**", "/js/**")
                 .permitAll()
                 .and()
                 .formLogin(form -> form
@@ -42,8 +48,8 @@ public class SecurityConfig{
         return http.build();
     }
 
-    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
-
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 }

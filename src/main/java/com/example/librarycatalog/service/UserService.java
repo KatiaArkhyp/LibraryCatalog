@@ -1,5 +1,6 @@
 package com.example.librarycatalog.service;
 
+import com.example.librarycatalog.models.Role;
 import com.example.librarycatalog.models.UserWithRole;
 
 public interface UserService {
@@ -8,4 +9,6 @@ public interface UserService {
     UserWithRole findByEmail(String email);
 
     UserWithRole findByUsername(String nickname);
+
+    Role getUserRole(Long userId);
 }

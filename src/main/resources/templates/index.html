@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org"
+      layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
     <title>Library</title>
@@ -25,8 +28,10 @@
             </div>
             <div class="row gx-5">
                 <div th:each="book : ${books}" class="col-lg-4 mb-5">
-                    <a class="btn btn-primary mb-1" th:href="@{/{bookId}/edit(bookId=${book.id})}">Edit the book</a>
-                    <a class="btn btn-danger mb-1" th:href="@{/{bookId}/delete(bookId=${book.id})}" onclick="return confirm('Are you sure you want to delete the book?')">Delete</a>
+                    <div sec:authorize="hasAuthority('ADMIN')">
+                        <a class="btn btn-primary mb-1" th:href="@{/{bookId}/edit(bookId=${book.id})}">Edit the book</a>
+                        <a class="btn btn-danger mb-1" th:href="@{/{bookId}/delete(bookId=${book.id})}" onclick="return confirm('Are you sure you want to delete the book?')">Delete</a>
+                    </div>
                     <div class="position-relative mb-3">
                         <img th:src="${book.coverUrlBook}" class="img-fluid rounded-3 mb-3 w-75" alt="Cover Image"/>
                         <p class="h3 fw-bolder mb-0" th:text="${book.title}"></p>

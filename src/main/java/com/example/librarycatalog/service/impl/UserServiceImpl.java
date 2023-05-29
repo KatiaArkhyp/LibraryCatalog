@@ -6,10 +6,12 @@ import com.example.librarycatalog.repository.RoleRepository;
 import com.example.librarycatalog.repository.UserRepository;
 import com.example.librarycatalog.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -38,4 +40,19 @@ public class UserServiceImpl implements UserService {
     public UserWithRole findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+    @Override
+    public Role getUserRole(Long userId) {
+        UserWithRole user = userRepository.findById(userId).orElse(null);
+        if (user != null) {
+            List<Role> roles = user.getRoles();
+            if (!roles.isEmpty()) {
+                return roles.get(0);
+            }
+        }
+        return null;
+    }
+
+
+
 }

@@ -1,11 +1,12 @@
 package com.example.librarycatalog.controllers;
 
-import com.example.librarycatalog.models.Author;
 import com.example.librarycatalog.models.Book;
-import com.example.librarycatalog.service.AuthorService;
+import com.example.librarycatalog.models.UserWithRole;
 import com.example.librarycatalog.service.BookService;
+import com.example.librarycatalog.service.UserService;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,16 +23,17 @@ import java.util.stream.Stream;
 @RequestMapping("/")
 public class BookController {
     private BookService bookService;
+    private UserService userService;
 
     @GetMapping()
-    public String showAllBooks(Model model){
+    public String showAllBooks(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         List<Book> books = bookService.getAllBooks();
+
         model.addAttribute("books", books);
         long bookCount = bookService.getBookCount();
         model.addAttribute("bookCount", bookCount);
         return "index";
     }
-
     @GetMapping("/search")
     public String searchBook(@RequestParam(value = "query") String query, Model model) {
         List<Book> books = Stream.of(
