@@ -41,18 +41,4 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByUsername(username);
     }
 
-    @Override
-    public Role getUserRole(Long userId) {
-        UserWithRole user = userRepository.findById(userId).orElse(null);
-        if (user != null) {
-            List<Role> roles = user.getRoles();
-            if (!roles.isEmpty()) {
-                return roles.get(0);
-            }
-        }
-        return null;
-    }
-
-
-
 }

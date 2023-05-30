@@ -19,18 +19,26 @@
 </head>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container px-5">
-    <a class="navbar-brand" href="/">Library Catalog</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-        <li sec:authorize="!isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/registration}">Register</a></li>
-        <li sec:authorize="!isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/login}">Log in</a></li>
-        <li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
+  <div class="container px-6">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse justify-content-start" id="navbarSupportedContent1">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link active" href="/"><i class="bi bi-journal-bookmark-fill"></i> Library catalog</a></li>
+      </ul>
+    </div>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent2">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" th:href="@{/authors}" > Authors</a></li>
         <div sec:authorize="hasAuthority('ADMIN')">
-          <li class="nav-item"><a class="nav-link text-info" th:href="@{create}" >Add Book</a></li>
+          <li class="nav-item"><a class="nav-link text-info" th:href="@{create}" ><i class="bi bi-book-fill"></i> Add Book</a></li>
         </div>
+      </ul>
+    </div>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent3">
+      <ul class="navbar-nav">
+        <li sec:authorize="!isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/registration}"><i class="bi bi-person-plus-fill"></i> Register</a></li>
+        <li sec:authorize="!isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/login}"><i class="bi bi-box-arrow-in-right"></i> Log in</a></li>
+        <li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/logout}"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
       </ul>
     </div>
   </div>

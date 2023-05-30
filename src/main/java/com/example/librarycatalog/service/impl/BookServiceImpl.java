@@ -59,6 +59,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<Book> getBooksByAuthorId(Long authorId) {
+        return bookRepository.findByAuthorId(authorId);
+    }
+
+    @Override
     public void editBook(Book book) {
         Book existingBook = bookRepository.findById(book.getId())
                 .orElseThrow(() -> new RuntimeException("Book not found with ID: " + book.getId()));
@@ -70,5 +75,10 @@ public class BookServiceImpl implements BookService {
         existingBook.setKeywords(book.getKeywords());
 
         bookRepository.save(existingBook);
+    }
+
+    @Override
+    public List<Book> getBooksByAuthorName(String name) {
+        return bookRepository.findByAuthorNameContainingIgnoreCase(name);
     }
 }

@@ -6,8 +6,8 @@ import com.example.librarycatalog.service.AuthorService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -18,10 +18,20 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public List<Author> getAllAuthors() {
         List<Author> authors = authorRepository.findAll();
-        return authors.stream()
+        Set<String> uniqueNames = new HashSet<>();
+        List<Author> uniqueAuthors = new ArrayList<>();
+
+        for (Author author : authors) {
+            if (uniqueNames.add(author.getName())) {
+                uniqueAuthors.add(author);
+            }
+        }
+
+        return uniqueAuthors.stream()
                 .sorted(Comparator.comparing(Author::getName))
-                .toList();
+                .collect(Collectors.toList());
     }
+
 
     @Override
     public List<Author> findByName(String name) {

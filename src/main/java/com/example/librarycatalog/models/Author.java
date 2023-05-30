@@ -22,7 +22,7 @@ public class Author {
 
     private String name;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
     private List<Book> book;
 
     @Builder
@@ -30,5 +30,4 @@ public class Author {
         this.id = id;
         this.name = name;
     }
-
 }

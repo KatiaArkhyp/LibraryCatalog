@@ -12,4 +12,6 @@ public interface KeywordService {
     Keyword saveKeyword(Keyword keyword);
     void deleteKeyword(Long id);
     Keyword getKeywordById(Long keywordId);
+
+    List<Keyword> getSelectedKeywords(HttpServletRequest request);
 }

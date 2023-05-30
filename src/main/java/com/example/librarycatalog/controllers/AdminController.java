@@ -39,16 +39,15 @@ public class AdminController {
     @PostMapping("/create")
     public String saveBook(@Valid @ModelAttribute("book") Book book,
                            BindingResult result,
-                           @ModelAttribute("author") Author author,
                            HttpServletRequest request){
         if(result.hasErrors()){
             return "books-create";
         }
-        List<Keyword> selectedKeywords = getSelectedKeywords(request);
+
+        List<Keyword> selectedKeywords = keywordService.getSelectedKeywords(request);
         book.setKeywords(selectedKeywords);
 
         bookService.saveBook(book);
-        book.setAuthor(author);
 
         return "redirect:/";
     }
@@ -70,7 +69,7 @@ public class AdminController {
         if(result.hasErrors()){
             return "book-edit";
         }
-        List<Keyword> selectedKeywords = getSelectedKeywords(request);
+        List<Keyword> selectedKeywords = keywordService.getSelectedKeywords(request);
         book.setKeywords(selectedKeywords);
 
         book.setId(bookId);
@@ -81,19 +80,12 @@ public class AdminController {
 
     @GetMapping("/{bookId}/delete")
     public String deleteBook(@PathVariable("bookId") Long bookId){
-        bookService.deleteBook(bookId);
-        return "redirect:/";
-    }
-
-    private List<Keyword> getSelectedKeywords(HttpServletRequest request) {
-        List<Keyword> selectedKeywords = new ArrayList<>();
-        String[] keywordIds = request.getParameterValues("keywords");
-        if (keywordIds != null) {
-            for (String keywordId : keywordIds) {
-                Keyword keyword = keywordService.getKeywordById(Long.parseLong(keywordId));
-                selectedKeywords.add(keyword);
-            }
+        Book book = bookService.getById(bookId);
+        Author author = book.getAuthor();
+        List<Book> authorBooks = bookService.getBooksByAuthorId(author.getId());
+        if (authorBooks.size() == 1) {
+            bookService.deleteBook(bookId);
         }
-        return selectedKeywords;
+        return "redirect:/";
     }
 }
