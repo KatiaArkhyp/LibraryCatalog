@@ -7,24 +7,37 @@
     <meta charset="UTF-8">
     <title>Library</title>
 </head>
-<body class="d-flex flex-column h-100">
+<body class="d-flex flex-column h-100 ">
 <main class="flex-shrink-0">
     <section layout:fragment="body" class="py-5">
+        <!-- Background image -->
+        <div class="p-5 text-center bg-image"
+                style="
+      background-image: url('https://static01.nyt.com/images/2015/10/24/opinion/24manguel/24manguel-superJumbo.jpg');
+      height: 400px;
+      margin-top: -50px;">
+            <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+                <div class="d-flex justify-content-center align-items-center h-100">
+                    <div class="text-white">
+                        <h1 class="fw-bolder mb-4">LIBRARY CATALOG</h1>
+                        <h4 class="fw-bolder">A home for <span th:text="${bookCount}"></span> books</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container px-5 my-5">
             <div th:if="${param.success}" class="alert alert-success">You have successfully registered!</div>
             <div class="text-left mb-5">
                 <div class="d-flex align-items-center justify-content-between">
-                    <h1 class="fw-bolder">Catalog of available books</h1>
                     <form th:action="@{/search}" class="form-inline my-2 my-lg-0 col-lg-6">
                         <div class="input-group">
                             <input type="search" class="form-control" name="query" placeholder="Search by title/author/keyword" aria-label="Search">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">Search</button>
+                                <button class="btn btn-outline-dark btn-rounded" type="submit">Search</button>
                             </div>
                         </div>
                     </form>
                 </div>
-                <p>A home for <span th:text="${bookCount}"></span> books.</p>
             </div>
             <div class="row gx-5">
                 <div th:each="book : ${books}" class="col-lg-4 mb-5">
@@ -34,7 +47,7 @@
                     </div>
                     <div class="position-relative mb-3">
                         <img th:src="${book.coverUrlBook}" class="img-fluid rounded-3 mb-3 w-75" alt="Cover Image"/>
-                        <p class="h3 fw-bolder mb-0" th:text="${book.title}"></p>
+                        <p class="h4 fw-bolder mb-0" th:text="${book.title}"></p>
                         <p th:text="${book.author.name}" class="fw-bolder text-muted"></p>
                         <p th:text="${book.bookSummary}" class="text-muted"></p>
                     </div>

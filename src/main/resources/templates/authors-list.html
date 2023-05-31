@@ -11,11 +11,11 @@
 <main class="flex-shrink-0">
     <section layout:fragment="body" class="py-5">
         <div class="container px-5 my-5" >
-            <h1 class="fw-bolder">List of Authors</h1>
+            <h1 class="fw-bolder mb-5">All authors in our library</h1>
             <div class="row gx-5">
-                <div th:each="author : ${authors}" class="col-lg-4 mb-5">
-                    <div class="position-relative mb-3">
-                        <p class="h3 fw-bolder mb-0">
+                <div th:each="author : ${authors}" class="col-lg-4 mb-2">
+                    <div class="position-relative mb-2">
+                        <p class="h4 fw-bolder mb-0">
                             <a th:href="@{/authors/books(authorName=${author.name})}" th:text="${author.name}"></a>
                         </p>
                     </div>

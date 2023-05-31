@@ -10,7 +10,7 @@
 </head>
 <body class="d-flex">
 <section layout:fragment="body" class="py-5">
-    <div class="container">
+    <div class="container" style="margin-top: 35px; margin-bottom: 75px">
         <div class="d-flex justify-content-center align-items-center main">
             <div class="col-md-6 mx-auto">
                 <div class="alert alert-success" th:if="${param.fail}">Username or email already exists</div>
@@ -37,7 +37,7 @@
                                 <p class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
                             </div>
                             <button th:action="@{/registration}" type="submit" class="btn btn-primary">Register</button>
-                            <a th:href="@{/login}" type="submit" class="btn btn-secondary">Login here</a>
+                            <a th:href="@{/login}" type="submit" class="btn btn-light">Already have an account? Sign in here!</a>
                         </form>
                     </div>
                 </div>
