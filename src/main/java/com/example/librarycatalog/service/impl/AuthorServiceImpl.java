@@ -43,14 +43,4 @@ public class AuthorServiceImpl implements AuthorService {
         return authorRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Author with this ID not found: " + id));
     }
-
-    @Override
-    public Author saveAuthor(Author author) {
-        return authorRepository.save(author);
-    }
-
-    @Override
-    public void deleteAuthor(Long id) {
-        authorRepository.deleteById(id);
-    }
 }

@@ -9,8 +9,6 @@ import java.util.List;
 @Service
 public interface KeywordService {
     List<Keyword> getAllKeywords();
-    Keyword saveKeyword(Keyword keyword);
-    void deleteKeyword(Long id);
     Keyword getKeywordById(Long keywordId);
 
     List<Keyword> getSelectedKeywords(HttpServletRequest request);

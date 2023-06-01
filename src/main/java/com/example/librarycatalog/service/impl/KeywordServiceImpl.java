@@ -22,16 +22,6 @@ public class KeywordServiceImpl implements KeywordService {
     }
 
     @Override
-    public Keyword saveKeyword(Keyword keyword) {
-        return keywordRepository.save(keyword);
-    }
-
-    @Override
-    public void deleteKeyword(Long id) {
-        keywordRepository.deleteById(id);
-    }
-
-    @Override
     public Keyword getKeywordById(Long keywordId) {
         return keywordRepository.findById(keywordId).orElse(null);
     }

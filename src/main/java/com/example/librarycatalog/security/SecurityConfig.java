@@ -2,6 +2,7 @@ package com.example.librarycatalog.security;
 
 import com.example.librarycatalog.models.Role;
 import com.example.librarycatalog.repository.RoleRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

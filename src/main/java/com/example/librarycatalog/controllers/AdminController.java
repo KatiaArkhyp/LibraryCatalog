@@ -80,12 +80,7 @@ public class AdminController {
 
     @GetMapping("/{bookId}/delete")
     public String deleteBook(@PathVariable("bookId") Long bookId){
-        Book book = bookService.getById(bookId);
-        Author author = book.getAuthor();
-        List<Book> authorBooks = bookService.getBooksByAuthorId(author.getId());
-        if (authorBooks.size() == 1) {
-            bookService.deleteBook(bookId);
-        }
+        bookService.deleteBook(bookId);
         return "redirect:/";
     }
 }
