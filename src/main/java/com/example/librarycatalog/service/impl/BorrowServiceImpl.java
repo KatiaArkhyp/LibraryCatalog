@@ -1,5 +1,7 @@
 package com.example.librarycatalog.service.impl;
 
+import com.example.librarycatalog.models.Book;
+import com.example.librarycatalog.models.BookStatus;
 import com.example.librarycatalog.models.Borrow;
 import com.example.librarycatalog.models.UserWithRole;
 import com.example.librarycatalog.repository.BorrowRepository;
@@ -31,5 +33,15 @@ public class BorrowServiceImpl implements BorrowService {
     @Override
     public void saveBorrow(Borrow borrow) {
         borrowRepository.save(borrow);
+    }
+
+    @Override
+    public List<Borrow> getAllBorrowedBooks() {
+        return borrowRepository.findAll();
+    }
+
+    @Override
+    public void returnBook(Long borrowId) {
+        borrowRepository.deleteById(borrowId);
     }
 }

@@ -32,7 +32,7 @@ public class SecurityConfig{
         http.csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/borrow-book/{bookId}", "/borrows").hasAuthority("USER")
-                .requestMatchers("/{bookId}/delete", "/{bookId}/edit", "/create").hasAuthority("ADMIN")
+                .requestMatchers("/{bookId}/delete", "/{bookId}/edit", "/create", "/borrowed-books", "/return-book/{borrowId}").hasAuthority("ADMIN")
                 .requestMatchers("/login", "/registration","/authors", "/authors/books", "/", "/search", "/registration/**", "/booking","/css/**", "/js/**")
                 .permitAll()
                 .and()

@@ -13,4 +13,6 @@ public interface BorrowService {
 
     List<Borrow> getBorrowsByUser(UserWithRole user);
     void saveBorrow(Borrow borrow);
+    List<Borrow> getAllBorrowedBooks();
+    void returnBook(Long borrowId);
 }

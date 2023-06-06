@@ -1,10 +1,9 @@
 package com.example.librarycatalog.controllers;
 
-import com.example.librarycatalog.models.Author;
-import com.example.librarycatalog.models.Book;
-import com.example.librarycatalog.models.Keyword;
+import com.example.librarycatalog.models.*;
 import com.example.librarycatalog.service.AuthorService;
 import com.example.librarycatalog.service.BookService;
+import com.example.librarycatalog.service.BorrowService;
 import com.example.librarycatalog.service.KeywordService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -23,7 +22,7 @@ import java.util.List;
 @RequestMapping("/")
 public class AdminController {
     private BookService bookService;
-
+    private BorrowService borrowService;
     private KeywordService keywordService;
 
     @GetMapping("/create")
@@ -45,7 +44,7 @@ public class AdminController {
 
         List<Keyword> selectedKeywords = keywordService.getSelectedKeywords(request);
         book.setKeywords(selectedKeywords);
-
+        book.setStatus(BookStatus.AVAILABLE);
         bookService.saveBook(book);
 
         return "redirect:/";
@@ -81,5 +80,22 @@ public class AdminController {
     public String deleteBook(@PathVariable("bookId") Long bookId){
         bookService.deleteBook(bookId);
         return "redirect:/";
+    }
+
+    @GetMapping("/borrowed-books")
+    public String showBorrowedBooks(Model model) {
+        List<Borrow> borrowedBooks = borrowService.getAllBorrowedBooks();
+        model.addAttribute("borrowedBooks", borrowedBooks);
+        return "/borrowed-books";
+    }
+
+    @GetMapping("/return-book/{borrowId}")
+    public String returnBook(@PathVariable("borrowId") Long borrowId) {
+        Borrow borrow = borrowService.getBorrowById(borrowId);
+        Book book = borrow.getBook();
+        book.setStatus(BookStatus.AVAILABLE);
+        bookService.saveBook(book);
+        borrowService.returnBook(borrowId);
+        return "redirect:/borrowed-books";
     }
 }

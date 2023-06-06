@@ -53,13 +53,4 @@ public class BorrowController {
         return "borrows";
     }
 
-    @PostMapping("/return-book/{borrowId}")
-    public String returnBook(@PathVariable("borrowId") Long borrowId) {
-        Borrow borrow = borrowService.getBorrowById(borrowId);
-        Book book = borrow.getBook();
-        book.setStatus(BookStatus.AVAILABLE);
-        bookService.saveBook(book);
-        entityManager.remove(borrow);
-        return "redirect:/borrows";
-    }
 }
