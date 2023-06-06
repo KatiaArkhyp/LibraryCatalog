@@ -23,7 +23,6 @@ import java.util.List;
 @RequestMapping("/")
 public class AdminController {
     private BookService bookService;
-    private AuthorService authorService;
 
     private KeywordService keywordService;
 

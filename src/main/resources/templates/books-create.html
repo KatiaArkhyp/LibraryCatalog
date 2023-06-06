@@ -3,74 +3,80 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
-  <meta charset="UTF-8">
-  <title>Book Create</title>
+    <meta charset="UTF-8">
+    <title>Book Create</title>
 </head>
 <body class="d-flex flex-column h-100">
 <main class="flex-shrink-0">
-  <section layout:fragment="body" class="py-5">
-    <div class="container">
-    <form role="form" method="post" th:action="@{/create}" th:object="${book}">
-      <div class="form-row">
-        <!-- title -->
-        <div class="form-group col-md-7 mb-2">
-          <label for="inputTitle">Title</label>
-          <input type="text"
-                 class="form-control"
-                 id="inputTitle"
-                 name="title"
-                 th:field="*{title}"
-                 placeholder="Harry Potter and the Philosopher's Stone">
-          <p th:if="${#fields.hasErrors('title')}" class="text-danger" th:errors="*{title}"></p>
-        </div>
-        <!-- author -->
-        <div class="form-group col-md-7 mb-2">
-          <label for="inputAuthor">Author</label>
-          <input type="text"
-                 class="form-control"
-                 id="inputAuthor"
-                 name="author.name"
-                 th:field="*{author.name}"
-                 placeholder="Joanne Rowling">
-        </div>
-      </div>
-      <!-- cover -->
-      <div class="form-group mb-2">
-        <label for="inputURL">Cover (URL)</label>
-        <input type="text"
-               class="form-control"
-               id="inputURL" name="coverUrlBook"
-               th:field="*{coverUrlBook}"
-               placeholder="https://cover-book.com/images/harry-potter.jpg">
-        <p th:if="${#fields.hasErrors('coverUrlBook')}" class="text-danger" th:errors="*{coverUrlBook}"></p>
-      </div>
-      <!-- summary -->
-      <div class="form-group mb-2">
-        <label for="inputSummary">Summary</label>
-        <textarea class="form-control"
-                  id="inputSummary"
-                  name="bookSummary"
-                  th:field="*{bookSummary}"
-                  placeholder="The novels follow Harry Potter, an 11-year-old boy who discovers he is the son of famous wizards and will attend Hogwarts School of Witchcraft and Wizardry." rows="5">
+    <section layout:fragment="body" class="py-5">
+        <div class="container">
+            <form role="form" method="post" th:action="@{/create}" th:object="${book}">
+                <div class="form-row">
+                    <!-- title -->
+                    <div class="form-group col-md-7 mb-2">
+                        <label for="inputTitle">Title</label>
+                        <input type="text"
+                               class="form-control"
+                               id="inputTitle"
+                               name="title"
+                               th:field="*{title}"
+                               placeholder="Harry Potter and the Philosopher's Stone">
+                        <p th:if="${#fields.hasErrors('title')}" class="text-danger" th:errors="*{title}"></p>
+                    </div>
+                    <!-- author -->
+                    <div class="form-group col-md-7 mb-2">
+                        <label for="inputAuthor">Author</label>
+                        <input type="text"
+                               class="form-control"
+                               id="inputAuthor"
+                               name="author.name"
+                               th:field="*{author.name}"
+                               placeholder="Joanne Rowling">
+                    </div>
+                </div>
+                <!-- cover -->
+                <div class="form-group mb-2">
+                    <label for="inputURL">Cover (URL)</label>
+                    <input type="text"
+                           class="form-control"
+                           id="inputURL" name="coverUrlBook"
+                           th:field="*{coverUrlBook}"
+                           placeholder="https://cover-book.com/images/harry-potter.jpg">
+                    <p th:if="${#fields.hasErrors('coverUrlBook')}" class="text-danger" th:errors="*{coverUrlBook}"></p>
+                </div>
+                <!-- summary -->
+                <div class="form-group mb-2">
+                    <label for="inputSummary">Summary</label>
+                    <textarea class="form-control"
+                              id="inputSummary"
+                              name="bookSummary"
+                              th:field="*{bookSummary}"
+                              placeholder="The novels follow Harry Potter, an 11-year-old boy who discovers he is the son of famous wizards and will attend Hogwarts School of Witchcraft and Wizardry."
+                              rows="5">
         </textarea>
-      </div>
-      <!-- keywords -->
-      <div class="form-group mb-2">
-        <label for="inputKeywords">Keywords</label>
-        <div class="form-check" th:each="keyword : ${keywords}">
-          <input type="checkbox"
-                 class="form-check-input"
-                 id="inputKeywords"
-                 th:id="${'keyword-' + keyword.id}"
-                 th:name="'keywords'"
-                 th:value="${keyword.id}">
-          <label class="form-check-label" th:for="${'keyword-' + keyword.id}" th:text="${keyword.keyword}"></label>
+                </div>
+                <!-- keywords -->
+                <div class="row">
+                    <div class="form-group mb-2" id="keyword-column">
+                        <label for="inputKeywords">Keywords</label>
+                        <div style="column-count: 3;">
+                            <div class="form-check" th:each="keyword : ${keywords}">
+                                <input type="checkbox"
+                                       class="form-check-input"
+                                       id="inputKeywords"
+                                       th:id="${'keyword-' + keyword.id}"
+                                       th:name="'keywords'"
+                                       th:value="${keyword.id}">
+                                <label class="form-check-label" th:for="${'keyword-' + keyword.id}"
+                                       th:text="${keyword.keyword}"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Add new book</button>
+            </form>
         </div>
-      </div>
-      <button type="submit" class="btn btn-primary">Add new book</button>
-    </form>
-    </div>
-  </section>
+    </section>
 </main>
 </body>
 </html>

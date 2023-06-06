@@ -9,4 +9,6 @@ public interface UserService {
     UserWithRole findByEmail(String email);
 
     UserWithRole findByUsername(String nickname);
+
+    void updateUserBan(boolean ban, String email);
 }

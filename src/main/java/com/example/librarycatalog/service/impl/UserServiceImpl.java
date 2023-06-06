@@ -41,4 +41,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByUsername(username);
     }
 
+    @Override
+    public void updateUserBan(boolean ban, String email) {
+        userRepository.updateUserBan(ban, email);
+    }
+
 }

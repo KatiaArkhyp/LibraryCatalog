@@ -10,7 +10,6 @@
 <body class="d-flex flex-column h-100 ">
 <main class="flex-shrink-0">
     <section layout:fragment="body" class="py-5">
-        <!-- Background image -->
         <div class="p-5 text-center bg-image"
                 style="
       background-image: url('https://static01.nyt.com/images/2015/10/24/opinion/24manguel/24manguel-superJumbo.jpg');
@@ -44,6 +43,14 @@
                     <div sec:authorize="hasAuthority('ADMIN')">
                         <a class="btn btn-primary mb-1" th:href="@{/{bookId}/edit(bookId=${book.id})}">Edit the book</a>
                         <a class="btn btn-danger mb-1" th:href="@{/{bookId}/delete(bookId=${book.id})}" onclick="return confirm('Are you sure you want to delete the book?')">Delete</a>
+                    </div>
+                    <div sec:authorize="hasAuthority('USER')">
+                        <div th:if="${book.status.name() == 'AVAILABLE'}">
+                            <a class="btn btn-primary mb-1" th:href="@{/borrow-book/{bookId}(bookId=${book.id})}">Borrow the book</a>
+                        </div>
+                        <div th:if="${book.status.name() == 'UNAVAILABLE'}">
+                            <span>Unavailable</span>
+                        </div>
                     </div>
                     <div class="position-relative mb-3">
                         <img th:src="${book.coverUrlBook}" class="img-fluid rounded-3 mb-3 w-75" alt="Cover Image"/>

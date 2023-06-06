@@ -36,7 +36,8 @@
           <div sec:authorize="hasAuthority('ADMIN')">
               <li class="nav-item"><a class="nav-link text-dark" th:href="@{create}" ><i class="bi bi-book-fill"></i> Add Book</a></li>
           </div>
-        <li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/authors}" ><i class="bi bi-person-square"></i> Authors</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/authors}" ><i class="bi bi-person-square"></i> Authors</a></li>
+          <li sec:authorize="hasAuthority('USER')" class="nav-item"><a class="nav-link" th:href="@{/borrows}" ><i class="bi bi-handbag"></i> Borrows</a></li>
       </ul>
     </div>
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent3">

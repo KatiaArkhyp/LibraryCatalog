@@ -1,6 +1,7 @@
 package com.example.librarycatalog.service.impl;
 
 import com.example.librarycatalog.models.Book;
+import com.example.librarycatalog.models.BookStatus;
 import com.example.librarycatalog.repository.BookRepository;
 import com.example.librarycatalog.service.BookService;
 import lombok.AllArgsConstructor;
@@ -81,4 +82,11 @@ public class BookServiceImpl implements BookService {
     public List<Book> getBooksByAuthorName(String name) {
         return bookRepository.findByAuthorNameContainingIgnoreCase(name);
     }
+
+    @Override
+    public void updateBookStatus(Long id, String bookStatus) {
+        BookStatus status = BookStatus.valueOf(bookStatus);
+        bookRepository.updateBookStatus(id, status);
+    }
+
 }

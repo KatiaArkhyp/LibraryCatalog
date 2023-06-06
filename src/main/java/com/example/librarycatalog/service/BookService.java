@@ -17,6 +17,7 @@ public interface BookService {
     long getBookCount();
     List<Book> getBooksByAuthorId(Long authorId);
     void editBook(Book book);
-
     List<Book> getBooksByAuthorName(String name);
+
+    void updateBookStatus(Long id, String bookStatus);
 }

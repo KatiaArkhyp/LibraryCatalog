@@ -40,4 +40,7 @@ public class UserWithRole {
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
     )
     private List<Role> roles = new ArrayList<>();
+
+    @Column(name = "ban")
+    private boolean ban;
 }

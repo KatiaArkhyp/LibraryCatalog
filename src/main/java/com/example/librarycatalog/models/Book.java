@@ -1,12 +1,8 @@
 package com.example.librarycatalog.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.List;
@@ -44,4 +40,6 @@ public class Book {
     )
     private List<Keyword> keywords;
 
+    @Enumerated(EnumType.STRING)
+    private BookStatus status;
 }

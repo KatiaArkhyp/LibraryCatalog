@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -48,7 +50,7 @@ public class BookController {
     }
     @GetMapping("/authors")
     public String showAllAuthors(Model model) {
-        List<Author> authors = authorService.getAllAuthors().stream().collect(Collectors.toList());
+        List<Author> authors = new ArrayList<>(authorService.getAllAuthors());
         model.addAttribute("authors", authors);
         return "authors-list";
     }
@@ -59,7 +61,6 @@ public class BookController {
                                     Model model) {
         List<Book> books = Stream.of(
                         bookService.getBooksByAuthorName(authorName)
-
                 ).flatMap(List::stream)
                 .distinct()
                 .toList();
